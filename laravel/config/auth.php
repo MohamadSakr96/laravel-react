@@ -2,6 +2,23 @@
 
 return [
 
+
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -13,10 +30,10 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -35,18 +52,18 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    // 'guards' => [
+    //     'web' => [
+    //         'driver' => 'session',
+    //         'provider' => 'users',
+    //     ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
-    ],
+    //     'api' => [
+    //         'driver' => 'token',
+    //         'provider' => 'users',
+    //         'hash' => false,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------
