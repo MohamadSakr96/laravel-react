@@ -1,0 +1,10 @@
+.nav-cont {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.navbar-left,
+.navbar-right {
+	display: flex;
+}
