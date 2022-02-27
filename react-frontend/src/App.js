@@ -7,18 +7,20 @@ import Login from './pages/login';
 import Register from './pages/register';
 import ContactUs from './pages/contactUs';
 import Services from './pages/services';
+import Profile from './pages/profile';
 
 function App() {
   return (
     <div className='App'>
 
       <BrowserRouter>
-       <Navbar/>
+        <Navbar/>
         <Route path={"/"} exact component={Home}/>
         <Route path={"/login"} component={Login}/>
         <Route path={"/register"} component={Register}/>
         <Route path={"/services"} component={Services}/>
         <Route path={"/contactus"} component={ContactUs}/>
+        <Route path={"/profile"} component={Profile}/>
       </BrowserRouter>
     </div>
 
