@@ -10,6 +10,7 @@ import Services from './pages/services';
 import Profile from './pages/profile';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 
   const [user_data, set_user_data] = useState([]);
   useEffect(()=>{
-    if(status != "")  {
+    if(status !== "")  {
       axios.get('http://127.0.0.1:8000/api/auth/user-profile',{  
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('user')}` 
@@ -37,12 +38,12 @@ function App() {
   return (
       <div className='App'>
         <Navbar {...user_data}/>
-        <Route path={"/"} exact component={Home}/>
-        <Route path={"/login"} component={Login}/>
-        <Route path={"/register"} component={Register}/>
-        <Route path={"/services"} component={Services}/>
-        <Route path={"/contactus"} component={ContactUs}/>
-        <Route path={"/profile"} component={ () => <Profile user={user_data} />}/>
+        <Route exact path={"/"} component={Home}/>
+        <Route exact path={"/login"} component={Login}/>
+        <Route exact path={"/register"} component={Register}/>
+        <Route exact path={"/services"} component={Services}/>
+        <Route exact path={"/contactus"} component={ContactUs}/>
+        <ProtectedRoute exact path={"/profile"} component={ () => <Profile user={user_data} />}/>
       </div>
   );
 }
