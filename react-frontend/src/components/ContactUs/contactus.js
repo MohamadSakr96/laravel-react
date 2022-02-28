@@ -60,7 +60,7 @@ export default function Contactus() {
                 <TextareaAutosize
                     aria-label="empty textarea"
                     placeholder="Comment"
-                    maxRows={5}
+                    minRows={5}
                     style={{ width: 400 }}
                 />
                 </Grid>
