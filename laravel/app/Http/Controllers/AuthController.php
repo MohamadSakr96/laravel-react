@@ -57,14 +57,14 @@ class AuthController extends Controller
             'user' => $user
         ], 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $updateData = $request->validate([
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ]);
-        User::whereId($id)->update($updateData);
+        User::update($updateData);
         return response()->json([
             'message' => 'User successfully updated!'
         ], 201);
