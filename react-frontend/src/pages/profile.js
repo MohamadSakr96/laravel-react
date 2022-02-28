@@ -1,23 +1,25 @@
 import React from 'react';
-import axios from 'axios';
-
-export default function Profile() {
+import { Link } from 'react-router-dom';
 
 
-    axios
-            .get('http://127.0.0.1:8000/api/auth/user-profile',{  
-                headers: { 
-                    Authorization: `Bearer ${localStorage.getItem('user')}` 
-                }
-            })
-            .then((response) => {
-                console.log(response.data);
-            }).catch(error => {
-                console.log(error);
-        });
+export default function Profile(props) {
 
-
-  return (
-    <h2>Profile</h2>
-  );
+    if (props.user[0] === '') {
+        return (
+            <div className='profile-container'>
+                <h2>Please Login</h2>
+                <Link to={'/login'}>here</Link>
+            </div>
+        );
+    }else {
+        return (
+            <div className='profile-container'>
+                <h2>Profile</h2>
+                <div>{props.user[0]}</div>
+                <div>{props.user[1]}</div>
+                <button type='button' className='btn btn-primary'>Edit</button>
+            </div>
+          );
+    }
+  
 }

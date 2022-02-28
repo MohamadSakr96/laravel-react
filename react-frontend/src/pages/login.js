@@ -11,10 +11,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { authenticate } from '../features/auth/authSlice';
 
 const theme = createTheme();
 
 export default function Login() {
+
+  const dispatch = useDispatch();
 
   const [ redirect, setRedirect ] = React.useState(false);
 
@@ -26,14 +30,14 @@ export default function Login() {
   };
 
   function loginUser(object) {
-    axios
-          .post('http://127.0.0.1:8000/api/auth/login',{  
+    axios.post('http://127.0.0.1:8000/api/auth/login',{  
               email: object.get('email'),
               password: object.get('password'),
             })
             .then((response) => {
                 console.log(response.data);
                 localStorage.setItem('user', response.data['access_token']);
+                dispatch(authenticate());
                 setRedirect(true);
             }).catch(error => {
                 console.log(error);
@@ -89,12 +93,12 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
             </Button>
             <Grid container>
               <Grid item>
                 <Link to={"/register"} variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Don't have an account? Register"}
                 </Link>
               </Grid>
             </Grid>
