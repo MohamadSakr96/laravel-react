@@ -8,3 +8,11 @@
 .navbar-right {
 	display: flex;
 }
+
+@media (max-width: 991px) {
+	.nav-cont,
+	.navbar-left,
+	.navbar-right {
+		flex-direction: column;
+	}
+}
