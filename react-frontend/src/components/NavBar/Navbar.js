@@ -31,7 +31,6 @@ export default function Navbar(props) {
             <div className="navbar-nav nav-cont">
                 <div className='navbar-left'>
                     <Link to={"/"} className="nav-link active">Home</Link>
-                    <Link to={"/services"} className="nav-link">Services</Link>
                     <Link to={"/contactus"} className="nav-link">Contact Us</Link>
                 </div>
                 <div className='navbar-right'>
@@ -46,7 +45,6 @@ export default function Navbar(props) {
                 <div className='navbar-left'>
                     <Link to={"/"} className="nav-link">Home</Link>
                     <Link to={"/profile"} className="nav-link active">Profile</Link>
-                    <Link to={"/services"} className="nav-link">Services</Link>
                     <Link to={"/contactus"} className="nav-link">Contact Us</Link>
                 </div>
                 <div className='navbar-right'>

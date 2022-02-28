@@ -6,7 +6,6 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
 import ContactUs from './pages/contactUs';
-import Services from './pages/services';
 import Profile from './pages/profile';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -41,7 +40,6 @@ function App() {
         <Route exact path={"/"} component={Home}/>
         <Route exact path={"/login"} component={Login}/>
         <Route exact path={"/register"} component={Register}/>
-        <Route exact path={"/services"} component={Services}/>
         <Route exact path={"/contactus"} component={ContactUs}/>
         <ProtectedRoute exact path={"/profile"} component={ () => <Profile user={user_data} />}/>
       </div>
