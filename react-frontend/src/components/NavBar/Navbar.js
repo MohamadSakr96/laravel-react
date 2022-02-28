@@ -10,19 +10,16 @@ export default function Navbar(props) {
     const dispatch = useDispatch();
 
     const logout = () => {
-        let token = localStorage.getItem('user');
-        axios.post('http://127.0.0.1:8000/api/auth/logout',{ 
-
-            headers: {
-                'Authorization': 'Bearer ' + token
-            } 
-
-        }).then((response) => {
-            console.log(response.message);
-        }).catch(error => {
-            console.log(error);
-        });
-        console.log(`Bearer ${token}`);
+        axios.get('http://127.0.0.1:8000/api/auth/logout',{  
+          headers: { 
+              Authorization: `Bearer ${localStorage.getItem('user')}` 
+          }
+      })
+      .then((response) => {
+          console.log(response.message);
+      }).catch(error => {
+          console.log(error);
+      });
         dispatch(forget());
         localStorage.clear();
     };
