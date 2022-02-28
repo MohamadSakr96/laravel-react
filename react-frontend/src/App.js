@@ -18,17 +18,20 @@ function App() {
 
   const [user_data, set_user_data] = useState([]);
   useEffect(()=>{
-      axios
-      .get('http://127.0.0.1:8000/api/auth/user-profile',{  
-          headers: { 
-              Authorization: `Bearer ${localStorage.getItem('user')}` 
-          }
+    if(status != "")  {
+      axios.get('http://127.0.0.1:8000/api/auth/user-profile',{  
+        headers: { 
+            Authorization: `Bearer ${localStorage.getItem('user')}` 
+        }
       })
       .then((response) => {
           set_user_data([...user_data, response.data['name'], response.data['email']]);
       }).catch(error => {
           console.log(error);
       });
+    }else {
+      set_user_data([]);
+    }
   },[status]);
 
   return (

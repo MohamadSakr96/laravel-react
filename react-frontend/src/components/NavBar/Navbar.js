@@ -10,18 +10,18 @@ export default function Navbar(props) {
     const dispatch = useDispatch();
 
     const logout = () => {
+        dispatch(forget());
         axios.get('http://127.0.0.1:8000/api/auth/logout',{  
           headers: { 
               Authorization: `Bearer ${localStorage.getItem('user')}` 
           }
       })
       .then((response) => {
-          console.log(response.message);
+          console.log(response["message"]);
+          localStorage.clear();
       }).catch(error => {
           console.log(error);
       });
-        dispatch(forget());
-        localStorage.clear();
     };
 
     let menu;
