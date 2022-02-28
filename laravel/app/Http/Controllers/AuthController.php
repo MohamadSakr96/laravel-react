@@ -57,6 +57,18 @@ class AuthController extends Controller
             'user' => $user
         ], 201);
     }
+    public function update(Request $request, $id)
+    {
+        $updateData = $request->validate([
+            'name' => 'required|string|between:2,100',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|confirmed|min:6',
+        ]);
+        User::whereId($id)->update($updateData);
+        return response()->json([
+            'message' => 'User successfully updated!'
+        ], 201);
+    }
 
     /**
      * Log the user out (Invalidate the token).
