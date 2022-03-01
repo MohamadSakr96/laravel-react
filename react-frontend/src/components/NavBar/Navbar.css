@@ -1,3 +1,7 @@
+.navbar {
+	background-color: #1c4685;
+}
+
 .nav-cont {
 	display: flex;
 	justify-content: space-between;
@@ -7,6 +11,11 @@
 .navbar-left,
 .navbar-right {
 	display: flex;
+}
+
+.nav-link {
+	font-size: 1.1rem;
+	font-weight: 500;
 }
 
 @media (max-width: 991px) {
