@@ -20,18 +20,24 @@ const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     
-    // updateUser(data);
+    UpdateUser(data);
 };
-function updateUser(object) {
+
+function UpdateUser(object) {
     axios
-        .post('http://127.0.0.1:8000/api/auth/register', {
-        name: object.get('name'),  
-        email: object.get('email'),
-        password: object.get('password'),
-        password_confirmation: object.get('password_confirmation'),
+        .post('http://127.0.0.1:8000/api/auth/update', {
+            name: object.get('name'),  
+            email: object.get('email'),
+            password: object.get('password'),
+            password_confirmation: object.get('password_confirmation'),
+        },
+        {
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem('user')}` 
+            }
         })
         .then((response) => {
-            console.log( response.data);
+            return (response.data["message"]);
         }).catch(error => {
             console.log(error);
     });
@@ -141,6 +147,9 @@ return (
                     </div>
                 </div>
             </div>
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item"> <UpdateUser /> </li>
+            </ul>
         </div>
     </div>
     );
