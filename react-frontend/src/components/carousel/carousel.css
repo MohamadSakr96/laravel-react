@@ -9,8 +9,14 @@
 	justify-content: flex-start;
 	width: 80%;
 }
+.carousel-item.active {
+	display: flex;
+	justify-content: center;
+}
 .carousel-inner > div > img {
-	width: 80%;
-	height: 500px;
+	width: 50%;
+	/* height: 500px; */
+	aspect-ratio: 1.6;
 	object-fit: cover;
+	border-radius: 10px;
 }

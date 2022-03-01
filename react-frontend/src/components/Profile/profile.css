@@ -1,0 +1,18 @@
+.profile-container {
+	display: flex;
+	justify-content: center;
+	margin: 6rem 0;
+}
+
+.profile-container > .card {
+	width: 33%;
+}
+
+.img-container {
+	background-color: #f7f7f7;
+}
+
+img {
+	width: 50% !important;
+	object-fit: cover;
+}
