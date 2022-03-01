@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        value: ''
+        value: localStorage.getItem('user'),
     },
     reducers: {
         authenticate: state => {
@@ -11,7 +11,6 @@ export const authSlice = createSlice({
             // doesn't actually mutate the state because it uses the Immer library,
             // which detects changes to a "draft state" and produces a brand new
             // immutable state based off those changes
-            console.log("user autheticated from redux :)")
             state.value = localStorage.getItem('user') 
         },
         forget: state => {

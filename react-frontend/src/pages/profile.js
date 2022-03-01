@@ -37,6 +37,7 @@ function UpdateUser(object) {
             }
         })
         .then((response) => {
+
             return (response.data["message"]);
         }).catch(error => {
             console.log(error);
