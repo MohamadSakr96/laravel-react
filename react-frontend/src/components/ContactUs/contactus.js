@@ -78,6 +78,8 @@ export default function Contactus() {
                     id="message"
                     label="Enter a message"
                     name="message"
+                    multiline 
+                    rows={5}
                 />
                 </Grid>
             </Grid>

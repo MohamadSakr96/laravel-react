@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,14 +16,41 @@ import axios from 'axios';
 const theme = createTheme();
 
 export default function Register() {
-    
+    const [input, setInput] = useState({ 
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''    
+    });
+    const [error, setError] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+    });
+
     const [ redirect, setRedirect ] = React.useState(false);
 
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setInput(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        
+        // createUser(data);
+    };
+
     const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    
-    createUser(data);
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        
+        console.log(data.get("name"));
+        console.log(data.get("email"));
+        console.log(data.get("password"));
+        console.log(data.get("password_confirmation"));
+        
+        // createUser(data);
     };
 
     function createUser(object) {
@@ -62,7 +89,7 @@ export default function Register() {
             <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-            Register
+            Create a New Account
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -75,6 +102,7 @@ export default function Register() {
                     id="name"
                     label="Name"
                     autoFocus
+                    onChange={handleChange}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -85,6 +113,7 @@ export default function Register() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={handleChange}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -96,6 +125,7 @@ export default function Register() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    onChange={handleChange}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -107,6 +137,7 @@ export default function Register() {
                     type="password"
                     id="password_confirmation"
                     autoComplete="new-password"
+                    onChange={handleChange}
                 />
                 </Grid>
             </Grid>
@@ -116,7 +147,7 @@ export default function Register() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
             >
-                Sign Up
+                Register
             </Button>
             <Grid container justifyContent="flex-start">
                 <Grid item>
