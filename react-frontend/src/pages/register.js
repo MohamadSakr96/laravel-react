@@ -42,10 +42,10 @@ export default function Register() {
 
     const validateInput = (name, value) => {
         if (name === "name"){
-            if (value.length < 3){
+            if (value.length < 2){
                 setError(prevState => ({
                     ...prevState,
-                    [name]: "must be more than 2 letters"
+                    [name]: "must be at least 2 letters long"
                 }));
             }else {
                 setError(prevState => ({
@@ -97,14 +97,8 @@ export default function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        
-        console.log(data.get("name"));
-        console.log(data.get("email"));
-        console.log(data.get("password"));
-        console.log(data.get("password_confirmation"));
-        
-        // createUser(data);
+        const data = new FormData(event.currentTarget);   
+        createUser(data);
     };
 
     function createUser(object) {
@@ -116,10 +110,12 @@ export default function Register() {
             password_confirmation: object.get('password_confirmation'),
             })
             .then((response) => {
-                console.log( response.data);
                 setRedirect(true);
             }).catch(error => {
-                console.log(error);
+                setError(prevState => ({
+                    ...prevState,
+                    ["email"]: "email already exists!"
+                }));
         });
     }
 
