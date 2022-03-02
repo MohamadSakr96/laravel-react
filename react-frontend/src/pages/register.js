@@ -20,7 +20,7 @@ export default function Register() {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''    
+        password_confirmation: ''
     });
     const [error, setError] = useState({
         name: '',
@@ -37,9 +37,63 @@ export default function Register() {
             ...prevState,
             [name]: value
         }));
-        
-        // createUser(data);
+        validateInput(name, value);
     };
+
+    const validateInput = (name, value) => {
+        if (name === "name"){
+            if (value.length < 3){
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "must be more than 2 letters"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+        if (name === "email") {
+            if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "email is not valid!"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+        if (name === "password") {
+            if (value.length < 8 || !value.match("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "invalid password"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+        if (name === "password_confirmation") {
+            if (value !== input.password) {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "wrong password"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -103,6 +157,8 @@ export default function Register() {
                     label="Name"
                     autoFocus
                     onChange={handleChange}
+                    error = {Boolean(error?.name)}
+                    helperText = {error?.name}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -114,6 +170,8 @@ export default function Register() {
                     name="email"
                     autoComplete="email"
                     onChange={handleChange}
+                    error = {Boolean(error?.email)}
+                    helperText = {error?.email}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -126,6 +184,8 @@ export default function Register() {
                     id="password"
                     autoComplete="new-password"
                     onChange={handleChange}
+                    error = {Boolean(error?.password)}
+                    helperText = {error?.password}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -138,6 +198,8 @@ export default function Register() {
                     id="password_confirmation"
                     autoComplete="new-password"
                     onChange={handleChange}
+                    error = {Boolean(error?.password_confirmation)}
+                    helperText = {error?.password_confirmation}
                 />
                 </Grid>
             </Grid>
