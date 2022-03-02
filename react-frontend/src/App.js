@@ -17,7 +17,7 @@ function App() {
 
   const [user_data, set_user_data] = useState([]);
   useEffect(()=>{
-    if(status !== "")  {
+    if(status !== null)  {
       axios.get('http://127.0.0.1:8000/api/auth/user-profile',{  
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('user')}` 

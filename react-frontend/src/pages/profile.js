@@ -23,10 +23,10 @@ export default function Profile(props) {
 
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
+    const HandleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        return UpdateUser(data);
+        UpdateUser(data);
     };
     
     function UpdateUser(object) {
@@ -45,7 +45,6 @@ export default function Profile(props) {
             .then((response) => {
                 dispatch(forget());
                 dispatch(authenticate());
-                return (response.data["message"]);
             }).catch(error => {
                 console.log(error);
         });
@@ -91,7 +90,7 @@ export default function Profile(props) {
                                     <Typography component="h1" variant="h5">
                                     Update Profile Info
                                     </Typography>
-                                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                    <Box component="form" onSubmit={HandleSubmit} sx={{ mt: 3 }}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                         <TextField

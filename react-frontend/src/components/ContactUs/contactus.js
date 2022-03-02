@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './contactus.css';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,19 +7,34 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import axios from 'axios';
 
 
 const theme = createTheme();
 
 export default function Contactus() {
     
-    const [ redirect, setRedirect ] = React.useState(false);
+    const [result, setResult] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        uploadMessage(data);
     };
+
+    function uploadMessage(object) {
+        axios
+            .post('http://127.0.0.1:8000/api/auth/message', {
+                name: object.get('name'),  
+                email: object.get('email'),
+                message: object.get('message'),
+            })
+            .then((response) => {
+                setResult(response.data["message"]);
+            }).catch(error => {
+                setResult(error.message);
+            });
+    }
     
     return (
     <ThemeProvider theme={theme}>
@@ -57,11 +72,12 @@ export default function Contactus() {
                 />
                 </Grid>
                 <Grid item xs={12}>
-                <TextareaAutosize
-                    aria-label="empty textarea"
-                    placeholder="Comment"
-                    minRows={5}
-                    style={{ width: 400 }}
+                <TextField
+                    required
+                    fullWidth
+                    id="message"
+                    label="Enter a message"
+                    name="message"
                 />
                 </Grid>
             </Grid>
@@ -75,6 +91,9 @@ export default function Contactus() {
             </Button>
             </Box>
         </Box>
+        <div className='result'>
+            {result}
+        </div>
         </Container>
     </ThemeProvider>
     );

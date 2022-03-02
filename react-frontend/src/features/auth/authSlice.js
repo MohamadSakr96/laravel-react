@@ -14,7 +14,7 @@ export const authSlice = createSlice({
             state.value = localStorage.getItem('user') 
         },
         forget: state => {
-            state.value = ''
+            state.value = null
         }
     }
 })
