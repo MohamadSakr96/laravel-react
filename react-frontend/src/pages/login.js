@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,9 +18,14 @@ const theme = createTheme();
 
 export default function Login() {
 
+  const [error, setError] = useState({
+    email: '',
+    password: ''
+});
+
   const dispatch = useDispatch();
 
-  const [ redirect, setRedirect ] = React.useState(false);
+  const [ redirect, setRedirect ] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,12 +40,14 @@ export default function Login() {
               password: object.get('password'),
             })
             .then((response) => {
-                console.log(response.data);
                 localStorage.setItem('user', response.data['access_token']);
                 dispatch(authenticate());
                 setRedirect(true);
             }).catch(error => {
-                console.log(error);
+              setError(prevState => ({
+                ...prevState,
+                ["email"]: "Wrong Credentials"
+            }));
         });
   }
 
@@ -76,6 +83,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              error = {Boolean(error?.email)}
+              helperText = {error?.email}
             />
             <TextField
               margin="normal"
@@ -86,6 +95,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error = {Boolean(error?.email)}
+              helperText = {error?.email}
             />
             <Button
               type="submit"
