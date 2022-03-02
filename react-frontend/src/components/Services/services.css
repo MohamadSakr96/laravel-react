@@ -1,8 +1,8 @@
-section {
+.services-container {
 	padding: 4rem 0;
 	display: flex;
 	justify-content: center;
 }
-section > div {
+.services-container > div {
 	width: 80%;
 }
