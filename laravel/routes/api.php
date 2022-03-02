@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessagesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,4 +23,5 @@ Route::group([
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::post('/message', [MessagesController::class, 'message']);    
 });

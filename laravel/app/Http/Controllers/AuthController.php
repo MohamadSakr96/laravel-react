@@ -8,6 +8,7 @@ use Validator;
 
 class AuthController extends Controller
 {
+
     /**
      * Create a new AuthController instance.
      *
@@ -88,6 +89,7 @@ class AuthController extends Controller
         auth()->logout();
         return response()->json(['message' => 'User successfully signed out']);
     }
+
     /**
      * Refresh a token.
      *
