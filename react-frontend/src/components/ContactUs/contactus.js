@@ -13,6 +13,52 @@ import axios from 'axios';
 const theme = createTheme();
 
 export default function Contactus() {
+    const [input, setInput] = useState({ 
+        name: '',
+        email: ''
+    });
+    const [error, setError] = useState({
+        name: '',
+        email: ''
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setInput(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        validateInput(name, value);
+    };
+
+    const validateInput = (name, value) => {
+        if (name === "name" || name == "message"){
+            if (value.length < 2){
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "must be at least 2 letters long"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+        if (name === "email") {
+            if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: "email is not valid!"
+                }));
+            }else {
+                setError(prevState => ({
+                    ...prevState,
+                    [name]: ""
+                }));
+            }
+        }
+    }
     
     const [result, setResult] = useState('');
 
@@ -59,6 +105,9 @@ export default function Contactus() {
                     id="name"
                     label="Name"
                     autoFocus
+                    onChange={handleChange}
+                    error = {Boolean(error?.name)}
+                    helperText = {error?.name}
                 />
                 </Grid>
                 <Grid item xs={12}>
@@ -69,6 +118,9 @@ export default function Contactus() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={handleChange}
+                    error = {Boolean(error?.email)}
+                    helperText = {error?.email}
                 />
                 </Grid>
                 <Grid item xs={12}>
