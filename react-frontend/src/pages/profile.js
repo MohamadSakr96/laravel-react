@@ -61,8 +61,8 @@ export default function Profile(props) {
                     <p className="card-text">{props.user[1]}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><a href='https://github.com/MohamadSakr96'>Github</a></li>
-                    <li className="list-group-item"><a href='https://www.linkedin.com/in/mohamadsakr96/'>LinkedIn</a></li>
+                    <li className="list-group-item"><a href='https://github.com/MohamadSakr96' target='_blank'>Github</a></li>
+                    <li className="list-group-item"><a href='https://www.linkedin.com/in/mohamadsakr96/' target='_blank'>LinkedIn</a></li>
                 </ul>
                 <div className="card-body">
                     <div className="accordion-item">
