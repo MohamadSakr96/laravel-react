@@ -30,7 +30,8 @@ export default function Profile(props) {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        isValid: ''
     });
     const dispatch = useDispatch();
 
@@ -95,6 +96,17 @@ export default function Profile(props) {
                     [name]: ""
                 }));
             }
+        }
+        if (error[name] !== '') {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: "not Valid"
+            }));
+        }else {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: ""
+            }));
         }
     }
 
@@ -180,6 +192,7 @@ export default function Profile(props) {
                                             label="Name"
                                             autoFocus
                                             onChange={handleChange}
+                                            onBlur={handleChange}
                                             error = {Boolean(error?.name)}
                                             helperText = {error?.name}
                                         />
@@ -193,6 +206,7 @@ export default function Profile(props) {
                                             name="email"
                                             autoComplete="email"
                                             onChange={handleChange}
+                                            onBlur={handleChange}
                                             error = {Boolean(error?.email)}
                                             helperText = {error?.email}
                                         />
@@ -207,6 +221,7 @@ export default function Profile(props) {
                                             id="password"
                                             autoComplete="new-password"
                                             onChange={handleChange}
+                                            onBlur={handleChange}
                                             error = {Boolean(error?.password)}
                                             helperText = {error?.password}
                                         />
@@ -221,6 +236,7 @@ export default function Profile(props) {
                                             id="password_confirmation"
                                             autoComplete="new-password"
                                             onChange={handleChange}
+                                            onBlur={handleChange}
                                             error = {Boolean(error?.password_confirmation)}
                                             helperText = {error?.password_confirmation}
                                         />
@@ -231,6 +247,7 @@ export default function Profile(props) {
                                         fullWidth
                                         variant="contained"
                                         sx={{ mt: 3, mb: 2 }}
+                                        disabled={Boolean(error?.isValid)}
                                     >
                                         Update
                                     </Button>

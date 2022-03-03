@@ -19,7 +19,8 @@ export default function Contactus() {
     });
     const [error, setError] = useState({
         name: '',
-        email: ''
+        email: '',
+        isValid: ''
     });
 
     const handleChange = (event) => {
@@ -57,6 +58,17 @@ export default function Contactus() {
                     [name]: ""
                 }));
             }
+        }
+        if (error[name] !== '') {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: "not Valid"
+            }));
+        }else {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: ""
+            }));
         }
     }
     
@@ -106,6 +118,7 @@ export default function Contactus() {
                     label="Name"
                     autoFocus
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.name)}
                     helperText = {error?.name}
                 />
@@ -119,6 +132,7 @@ export default function Contactus() {
                     name="email"
                     autoComplete="email"
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.email)}
                     helperText = {error?.email}
                 />
@@ -140,6 +154,7 @@ export default function Contactus() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={Boolean(error?.isValid)}
             >
                 Submit
             </Button>

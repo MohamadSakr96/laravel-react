@@ -26,10 +26,11 @@ export default function Register() {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        isValid: ''
     });
 
-    const [ redirect, setRedirect ] = React.useState(false);
+    const [ redirect, setRedirect ] = useState(false);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -93,6 +94,17 @@ export default function Register() {
                 }));
             }
         }
+        if (error[name] !== '') {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: "not Valid"
+            }));
+        }else {
+            setError(prevState => ({
+                ...prevState,
+                ["isValid"]: ""
+            }));
+        }
     }
 
     const handleSubmit = (event) => {
@@ -153,6 +165,7 @@ export default function Register() {
                     label="Name"
                     autoFocus
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.name)}
                     helperText = {error?.name}
                 />
@@ -166,6 +179,7 @@ export default function Register() {
                     name="email"
                     autoComplete="email"
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.email)}
                     helperText = {error?.email}
                 />
@@ -180,6 +194,7 @@ export default function Register() {
                     id="password"
                     autoComplete="new-password"
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.password)}
                     helperText = {error?.password}
                 />
@@ -194,6 +209,7 @@ export default function Register() {
                     id="password_confirmation"
                     autoComplete="new-password"
                     onChange={handleChange}
+                    onBlur={handleChange}
                     error = {Boolean(error?.password_confirmation)}
                     helperText = {error?.password_confirmation}
                 />
@@ -204,6 +220,7 @@ export default function Register() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={Boolean(error?.isValid)}
             >
                 Register
             </Button>
